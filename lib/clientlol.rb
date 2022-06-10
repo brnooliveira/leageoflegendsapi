@@ -6,12 +6,12 @@ Dotenv.load('.env')
 
 class LeagueApi 
 
-    LOL_URL_BR1 = 'https://br1.api.riotgames.com/lol/'
+    LOL_URL_BR1 = 'https://br1.api.riotgames.com/'
     LOL_URL_AMERICAS = 'https://americas.api.riotgames.com/'
     API_KEY = ENV['API_KEY']
 
     def champion_rotations
-        uri = URI(LOL_URL_BR1 + 'platform/v3/champion-rotations')
+        uri = URI(LOL_URL_BR1 + 'lol/platform/v3/champion-rotations')
         params = {:api_key => API_KEY }
         uri.query = URI.encode_www_form(params)
         res = Net::HTTP.get_response(uri)
@@ -19,7 +19,7 @@ class LeagueApi
     end
 
     def tournaments
-        uri = URI(LOL_URL_BR1 + 'clash/v1/tournaments')
+        uri = URI(LOL_URL_BR1 + 'lol/clash/v1/tournaments')
         params = {:api_key => API_KEY }
         uri.query = URI.encode_www_form(params)
         res = Net::HTTP.get_response(uri)
@@ -57,7 +57,7 @@ class LeagueApi
     end
 
     def lol_status
-        uri = URI(LOL_URL_BR1 + 'status/v4/platform-data')
+        uri = URI(LOL_URL_BR1 + 'lol/status/v4/platform-data')
         params = {:api_key => API_KEY}
         uri.query = URI.encode_www_form(params)
         res = Net::HTTP.get_response(uri)
@@ -66,5 +66,5 @@ class LeagueApi
 end
 
 req = LeagueApi.new
-puts req.account
+puts req.lol_status
 
